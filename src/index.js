@@ -4,8 +4,10 @@ import express from "express";
 
 const app = express();
 
-DBConnect();
-
-app.listen(process.env.PORT, () =>
-  console.log(`App is listing on port ${process.env.PORT}`)
-);
+DBConnect()
+  .then(() =>
+    app.listen(process.env.PORT, () =>
+      console.log(`App is listing on port ${process.env.PORT}`)
+    )
+  )
+  .catch((error) => console.log(`Mongodb connection error ${error}`));
